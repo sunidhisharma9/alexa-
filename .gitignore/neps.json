@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "neps info",
+            "invocationName": "n.e.p.s. info",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -16,12 +16,15 @@
                     "samples": []
                 },
                 {
-                    "name": "nepsIntent",
+                    "name": "newIntent",
                     "slots": [],
                     "samples": [
                         "tell me",
-                        "tell me about neps",
-                        "tell me about neps infrastructure",
+                        "yes",
+                        "please",
+                        "tell me about n.e.p.s.",
+                        "tell me about n.e.p.s. infrastructure",
+                        "new era",
                         "new era public school"
                     ]
                 }
