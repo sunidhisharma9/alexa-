@@ -1,0 +1,32 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "neps info",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "nepsIntent",
+                    "slots": [],
+                    "samples": [
+                        "tell me",
+                        "tell me about neps",
+                        "tell me about neps infrastructure",
+                        "new era public school"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
