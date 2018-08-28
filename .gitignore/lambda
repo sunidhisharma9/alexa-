@@ -1,0 +1,93 @@
+def lambda_handler(event, context):
+    if event['request']['type'] == "LaunchRequest" :
+        return onLaunch(event['request'], event['session'])
+    elif event['request']['type'] == "IntentRequest" :
+        return onIntent(event['request'], event['session'])
+    elif event['request']['type'] == "SessionEndedRequest" :
+        return onSessionEnd(event['request'], event['session'])
+
+def onLaunch(launchRequest, session):
+    return welcomeuser()
+
+def onIntent(intentRequest, session):
+             
+    intent = intentRequest['intent']
+    intentName = intentRequest['intent']['name']
+    if intentName == "nepsIntent":
+        return neps_info(intent, session)
+    elif intentName == "AMAZON.HelpIntent":
+        return welcomeuser()
+    elif intentName == "AMAZON.CancelIntent" or intentName == "AMAZON.StopIntent":
+        return handleSessionEndRequest()
+    else:
+        raise ValueError("Invalid intent")
+
+def onSessionEnd(sessionEndedRequest, session):
+    print("on_session_ended requestId=" + sessionEndedRequest['requestId'] + ", sessionId=" + session['sessionId'])
+
+def welcomeuser():
+    sessionAttributes = {}
+    cardTitle = " Hello! Namaste!"
+    speechOutput =  "Hello , Welcome to neps info!!! "\
+     "You can ask information about neps by saying give info"
+    repromptText =  "You can ask information about neps by saying give info"
+    shouldEndSession = False
+    
+    return buildResponse(sessionAttributes, buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession))
+
+def neps_info(intent, session):
+    import random
+    index = random.randint(0,len(brainteaser)-1)
+    cardTitle = intent['name']
+    sessionAttributes = {}
+    speechOutput = "Information is that " + brainteaser[index] 
+    repromptText = "You can ask information about neps by saying give info"
+    shouldEndSession = True                    
+    return buildResponse(sessionAttributes, buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession))
+
+def handleSessionEndRequest():
+    cardTitle = "Session Ended"
+    speechOutput = "Thank you for using neps info Alexa Skills Kit. " \
+                    "Have a great day! "
+    shouldEndSession = True
+    return buildResponse({}, buildSpeechletResponse(cardTitle, speechOutput, None, shouldEndSession))
+
+def buildSpeechletResponse(title, output, repromptTxt, endSession):
+    return {
+        'outputSpeech': {
+            'type': 'PlainText',
+            'text': output
+            },
+              'card': {
+            'type': 'Simple',
+            'title': title,
+            'content': output
+            },
+            
+        'reprompt': {
+            'outputSpeech': {
+                'type': 'PlainText',
+                'text': repromptTxt
+                }
+            },
+        'shouldEndSession': endSession
+    }
+
+
+def buildResponse(sessionAttr , speechlet):
+    return {
+        'version': '1.0',
+        'sessionAttributes': sessionAttr,
+        'response': speechlet
+    }
+
+
+
+brainteaser = [ "New Era Public School, is a school in Mayapuri, New Delhi,India.",
+                "It was founded in 1960 by the New Era Education Society in Delhi.",
+     "The project of Mr. R.L. Chopra and Mrs. Usha Chopra came into existence in 1965.",
+     "The school is an All India Senior Secondary school", 
+     "It's affiliated with the Central Board of Secondary Education and recognised by the Directorate of Education.",
+     "The New Era Public School in New Delhi is an independently operating school and does not have any other branches."
+                
+                ]
