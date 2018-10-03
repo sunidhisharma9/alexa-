@@ -1,0 +1,38 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "invention facts",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "factIntent",
+                    "slots": [],
+                    "samples": [
+                        "a fact",
+                        "a invention fact",
+                        "tell me a fact",
+                        "tell me a invention fact",
+                        "give me a fact",
+                        "give me a invention fact",
+                        "give me some information",
+                        "give me some invention information",
+                        "tell me something",
+                        "give me something"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
